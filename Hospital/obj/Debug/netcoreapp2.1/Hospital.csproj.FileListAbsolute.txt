@@ -1,0 +1,10 @@
+C:\Users\user\source\repos\mamas\Hospital\Hospital\bin\Debug\netcoreapp2.1\Hospital.deps.json
+C:\Users\user\source\repos\mamas\Hospital\Hospital\bin\Debug\netcoreapp2.1\Hospital.runtimeconfig.json
+C:\Users\user\source\repos\mamas\Hospital\Hospital\bin\Debug\netcoreapp2.1\Hospital.runtimeconfig.dev.json
+C:\Users\user\source\repos\mamas\Hospital\Hospital\bin\Debug\netcoreapp2.1\Hospital.dll
+C:\Users\user\source\repos\mamas\Hospital\Hospital\bin\Debug\netcoreapp2.1\Hospital.pdb
+C:\Users\user\source\repos\mamas\Hospital\Hospital\obj\Debug\netcoreapp2.1\Hospital.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\mamas\Hospital\Hospital\obj\Debug\netcoreapp2.1\Hospital.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\mamas\Hospital\Hospital\obj\Debug\netcoreapp2.1\Hospital.AssemblyInfo.cs
+C:\Users\user\source\repos\mamas\Hospital\Hospital\obj\Debug\netcoreapp2.1\Hospital.dll
+C:\Users\user\source\repos\mamas\Hospital\Hospital\obj\Debug\netcoreapp2.1\Hospital.pdb
