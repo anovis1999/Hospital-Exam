@@ -20,7 +20,7 @@ namespace Hospital
             Job j = new Job("zutar", "pro",AuthorList);
             Worker w = new Worker("jhon", 55, j);
 
-            Console.WriteLine(w.GetWorkerJobData.GetJobRanks[0].GetRisk );
+            Console.WriteLine(w.GetWorkerJobData.GetJobRanks[0].GetRisk);
 
             string sAttr = ConfigurationManager.AppSettings.Get("BaseHourleySellary");
             Console.WriteLine(sAttr);
