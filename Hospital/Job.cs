@@ -8,9 +8,9 @@ namespace Hospital
     {
         private string JobName;
         private string JobType;
-        private string[] JobRanks;
+        private List<Ranks> JobRanks;
 
-        public Job(string JobName, string JobType, string[] JobRanks)
+        public Job(string JobName, string JobType, List<Ranks> JobRanks)
         {
             this.JobName = JobName;
             this.JobType = JobType;
@@ -24,7 +24,7 @@ namespace Hospital
         {
             get { return this.JobType; }
         }
-        public string[] GetJobRanks
+        public List<Ranks> GetJobRanks
         {
             get { return this.JobRanks; }
         }
