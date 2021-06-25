@@ -1,12 +1,17 @@
 ﻿using System;
-
+using System.Configuration;
+using System.Collections.Specialized;
 namespace Hospital
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            string sAttr = ConfigurationManager.AppSettings.Get("BaseHourleySellary");
+
+
+            Console.WriteLine(sAttr);
+
         }
     }
 }
