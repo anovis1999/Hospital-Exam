@@ -6,41 +6,30 @@ namespace Hospital
 {
     class Worker
     {
-        private string name;
-        private string workerid;
-        private string jobname;
-        private string jobtype;
-        private string[] jobranks;
-        private bool dangerousrank;
+        private string Name;
+        private Guid WorkerId;
+        private int WorkHours;
+     
 
-        public Worker(string name, string workerid, string jobname, string jobtype, string[] jobranks, bool dangerousrank)
+        public Worker(string Name, int WorkHours)
         {
-            this.name = name;
-            this.jobname = jobname;
-            this.jobtype = jobtype;
-            this.workerid = workerid;
-            this.jobranks = jobranks;
-            this.dangerousrank = dangerousrank;
+            this.Name = Name;
+            this.WorkerId = new Guid();
+            this.WorkHours = WorkHours;
         }
-        public string Name
+
+        public string GetName
         {
-            get { return this.name; }
+            get { return this.Name; }
         }
-        public string Jobname
+        public Guid GetWorkerid
         {
-            get { return this.jobname; }
+            get { return this.WorkerId; }
         }
-        public string Jobtype
+        public int GetWorkhours
         {
-            get { return this.jobtype; }
+            get { return this.WorkHours; }
         }
-        public string Workerid
-        {
-            get { return this.workerid; }
-        }
-        public bool Dangerousrank
-        {
-            get { return this.dangerousrank; }
-        }
+
     }
-}
+} 
