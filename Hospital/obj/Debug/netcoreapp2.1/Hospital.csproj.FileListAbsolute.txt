@@ -10,3 +10,16 @@ C:\Users\user\source\repos\mamas\Hospital\Hospital\obj\Debug\netcoreapp2.1\Hospi
 C:\Users\user\source\repos\mamas\Hospital\Hospital\obj\Debug\netcoreapp2.1\Hospital.pdb
 C:\Users\user\source\repos\mamas\Hospital\Hospital\obj\Debug\netcoreapp2.1\Hospital.csprojAssemblyReference.cache
 C:\Users\user\source\repos\mamas\Hospital\Hospital\bin\Debug\netcoreapp2.1\Hospital.dll.config
+C:\Users\ofri3\source\repos\‏‏תיקיה חדשה\Hospital-Exam\Hospital\obj\Debug\netcoreapp2.1\Hospital.dll
+C:\Users\ofri3\source\repos\‏‏תיקיה חדשה\Hospital-Exam\Hospital\obj\Debug\netcoreapp2.1\Hospital.pdb
+C:\Users\ofri3\source\repos\‏‏תיקיה חדשה\Hospital-Exam\Hospital\bin\Debug\netcoreapp2.1\Hospital.dll.config
+C:\Users\ofri3\source\repos\‏‏תיקיה חדשה\Hospital-Exam\Hospital\bin\Debug\netcoreapp2.1\Hospital.deps.json
+C:\Users\ofri3\source\repos\‏‏תיקיה חדשה\Hospital-Exam\Hospital\bin\Debug\netcoreapp2.1\Hospital.runtimeconfig.json
+C:\Users\ofri3\source\repos\‏‏תיקיה חדשה\Hospital-Exam\Hospital\bin\Debug\netcoreapp2.1\Hospital.runtimeconfig.dev.json
+C:\Users\ofri3\source\repos\‏‏תיקיה חדשה\Hospital-Exam\Hospital\bin\Debug\netcoreapp2.1\Hospital.dll
+C:\Users\ofri3\source\repos\‏‏תיקיה חדשה\Hospital-Exam\Hospital\bin\Debug\netcoreapp2.1\Hospital.pdb
+C:\Users\ofri3\source\repos\‏‏תיקיה חדשה\Hospital-Exam\Hospital\obj\Debug\netcoreapp2.1\Hospital.csproj.AssemblyReference.cache
+C:\Users\ofri3\source\repos\‏‏תיקיה חדשה\Hospital-Exam\Hospital\obj\Debug\netcoreapp2.1\Hospital.AssemblyInfoInputs.cache
+C:\Users\ofri3\source\repos\‏‏תיקיה חדשה\Hospital-Exam\Hospital\obj\Debug\netcoreapp2.1\Hospital.AssemblyInfo.cs
+C:\Users\ofri3\source\repos\‏‏תיקיה חדשה\Hospital-Exam\Hospital\obj\Debug\netcoreapp2.1\Hospital.csproj.CoreCompileInputs.cache
+C:\Users\ofri3\source\repos\‏‏תיקיה חדשה\Hospital-Exam\Hospital\obj\Debug\netcoreapp2.1\Hospital.genruntimeconfig.cache

@@ -16,6 +16,21 @@ namespace Hospital
             this.JobType = JobType;
             this.JobRanks = JobRanks;
         }
+
+        public double Calc(int hours)
+        {
+            double salary = 0;
+            for (int i = 0; i < this.JobRanks.Count; i++)
+            {
+                
+                Ranks r = new Ranks(this.JobRanks[i].GetRankName, this.JobRanks[i].GetExpansionRate, this.JobRanks[i].GetMinimumHours, this.JobRanks[i].GetFixedHours, this.JobRanks[i].GetRisk);
+                salary += r.GetMonthlySalary(hours);
+                Console.WriteLine(salary);
+            }
+            return salary;
+        }
+
+
         public string GetJobname
         {
             get { return this.JobName; }

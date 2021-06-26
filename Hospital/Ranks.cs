@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json.Linq;
+using System.Configuration;
 
 namespace Hospital
 {
     class Ranks
     {
         private string RankName;
-        private int ExpansionRate;
+        private double ExpansionRate;
         private int MinimumHours;
         private int FixedHours;
-        private int Risk;
+        private double Risk;
 
 
-        public Ranks(string RankName, int ExpansionRate, int MinimumHours, int FixedHours, int Risk)
+        public Ranks(string RankName, double ExpansionRate, int MinimumHours, int FixedHours, double Risk)
         {
             this.RankName = RankName;
             this.ExpansionRate = ExpansionRate;
@@ -27,7 +29,7 @@ namespace Hospital
         {
             get { return this.RankName; }
         }
-        public int GetExpansionRate
+        public double GetExpansionRate
         {
             get { return this.ExpansionRate; }
         }
@@ -39,15 +41,30 @@ namespace Hospital
         {
             get { return this.FixedHours; }
         }
-        public int GetRisk
+        public double GetRisk
         {
             get { return this.Risk; }
         }
 
-        public static long GetMonthlySalary()
+        public double  GetMonthlySalary(int hours)
         {
+            string salary = ConfigurationManager.AppSettings.Get("BaseHourleySellary");
+            int newsala = Int32.Parse(salary);
 
-            return 123;
+            if (this.ExpansionRate == 0)
+            {
+                double CurrentSalary = hours * newsala;
+                return CurrentSalary + (this.Risk / 100 * CurrentSalary);
+            }
+            else if (this.MinimumHours!=0) {
+                double CurrentSalary = (this.ExpansionRate / 100 * newsala + newsala) * this.FixedHours;
+                return CurrentSalary + (this.Risk/100 * CurrentSalary);
+            }
+            else
+            {
+                double CurrentSalary = (this.ExpansionRate / 100 * newsala + newsala) * hours;
+                return CurrentSalary + (this.Risk / 100 * CurrentSalary);
+            }
         }
 
     }
