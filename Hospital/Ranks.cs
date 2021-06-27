@@ -12,16 +12,14 @@ namespace Hospital
         private double ExpansionRate;
         private int MinimumHours;
         private int FixedHours;
-        private double Risk;
 
 
-        public Ranks(string RankName, double ExpansionRate, int MinimumHours, int FixedHours, double Risk)
+        public Ranks(string RankName, double ExpansionRate, int MinimumHours, int FixedHours)
         {
             this.RankName = RankName;
             this.ExpansionRate = ExpansionRate;
             this.MinimumHours = MinimumHours;
             this.FixedHours = FixedHours;
-            this.Risk = Risk;
 
         }
 
@@ -29,41 +27,42 @@ namespace Hospital
         {
             get { return this.RankName; }
         }
+
         public double GetExpansionRate
         {
             get { return this.ExpansionRate; }
         }
+
         public int GetMinimumHours
         {
             get { return this.MinimumHours; }
         }
+
         public int GetFixedHours
         {
             get { return this.FixedHours; }
         }
-        public double GetRisk
-        {
-            get { return this.Risk; }
-        }
 
-        public double  GetMonthlySalary(int hours)
+        
+
+        public double  GetMonthlySalary(int hours, int Risk)
         {
             string salary = ConfigurationManager.AppSettings.Get("BaseHourleySellary");
-            int newsala = Int32.Parse(salary);
+            int newsalary = Int32.Parse(salary);
 
             if (this.ExpansionRate == 0)
             {
-                double CurrentSalary = hours * newsala;
-                return CurrentSalary + (this.Risk / 100 * CurrentSalary);
+                double CurrentSalary = hours * newsalary;
+                return CurrentSalary + (Risk / 100 * CurrentSalary);
             }
             else if (this.MinimumHours!=0) {
-                double CurrentSalary = (this.ExpansionRate / 100 * newsala + newsala) * this.FixedHours;
-                return CurrentSalary + (this.Risk/100 * CurrentSalary);
+                double CurrentSalary = (this.ExpansionRate / 100 * newsalary + newsalary) * this.FixedHours;
+                return CurrentSalary + (Risk/100 * CurrentSalary);
             }
             else
             {
-                double CurrentSalary = (this.ExpansionRate / 100 * newsala + newsala) * hours;
-                return CurrentSalary + (this.Risk / 100 * CurrentSalary);
+                double CurrentSalary = (this.ExpansionRate / 100 * newsalary + newsalary) * hours;
+                return CurrentSalary + (Risk / 100 * CurrentSalary);
             }
         }
 
