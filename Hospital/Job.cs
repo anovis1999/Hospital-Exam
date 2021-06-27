@@ -20,18 +20,6 @@ namespace Hospital
 
         }
 
-        public double CalculateSalary(int hours)
-        {
-            double salary = 0;
-            for (int i = 0; i < this.JobRanks.Count; i++)
-            {
-                
-                Ranks r = new Ranks(this.JobRanks[i].GetRankName, this.JobRanks[i].GetExpansionRate, this.JobRanks[i].GetMinimumHours, this.JobRanks[i].GetFixedHours);
-                salary += r.GetMonthlySalary(hours, Risk);
-            }
-            return salary;
-        }
-
         public string GetJobname
         {
             get { return this.JobName; }
@@ -45,6 +33,18 @@ namespace Hospital
         public List<Ranks> GetJobRanks
         {
             get { return this.JobRanks; }
+        }
+
+        public double CalculateSalary(int hours)
+        {
+            double salary = 0;
+            for (int i = 0; i < this.JobRanks.Count; i++)
+            {
+
+                Ranks rank = new Ranks(this.JobRanks[i].GetRankName, this.JobRanks[i].GetExpansionRate, this.JobRanks[i].GetMinimumHours, this.JobRanks[i].GetFixedHours);
+                salary += rank.GetCurrentSalary(hours, Risk);
+            }
+            return salary;
         }
     }
 }

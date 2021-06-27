@@ -12,7 +12,6 @@ namespace Hospital
     {
         static void Main(string[] args)
         {
-           
             while (true)
             {
                 Console.WriteLine("press 1 to watch more workers salary's");
@@ -23,20 +22,6 @@ namespace Hospital
                 Boolean result = Menu.MenuOptions(UserActionInt);
                 return;
             }
-
-
-
-            //string sql = "insert into Workers (workerId, workerName, workerHours, workerJobId) values (1, roni, 55, 1)";
-
-
-
-
-            //string sAttr = ConfigurationManager.AppSettings.Get("BaseHourleySellary");
-            //Console.WriteLine(sAttr);
-            //string jsonData = ConfigurationManager.AppSettings.Get("jobdata");
-
-            //var details = JObject.Parse(jsonData);
-            //Console.WriteLine(details["simple_cleaner"]["ranks"][0]);
         }
     }
 }

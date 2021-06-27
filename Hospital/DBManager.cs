@@ -12,13 +12,10 @@ namespace Hospital
         {
             string cs = @"URI=file:C:\Users\user\source\repos\mamas\Hospital\Hospital\database.db";
             SQLiteConnection sqlite_conn;
-            // Create a new database connection:
             sqlite_conn = new SQLiteConnection(cs);
-            // Open the connection:
             try
             {
                 sqlite_conn.Open();
-                //Console.WriteLine("Connection Created Successfully!");
             }
             catch (Exception ex)
             {

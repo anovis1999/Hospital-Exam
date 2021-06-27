@@ -45,7 +45,7 @@ namespace Hospital
 
         
 
-        public double  GetMonthlySalary(int hours, int Risk)
+        public double GetCurrentSalary(int hours, int Risk)
         {
             string salary = ConfigurationManager.AppSettings.Get("BaseHourleySellary");
             int newsalary = Int32.Parse(salary);
@@ -56,14 +56,13 @@ namespace Hospital
                 return CurrentSalary + (Risk / 100 * CurrentSalary);
             }
             else if (this.MinimumHours!=0) {
-                if (hours >= FixedHours)
+                if (hours >= MinimumHours)
                 {
                     double CurrentSalary = (this.ExpansionRate / 100 * newsalary + newsalary) * this.FixedHours;
                     return CurrentSalary + (Risk / 100 * CurrentSalary);
                 }
                 else
                     return 0;
-                
             }
             else
             {
