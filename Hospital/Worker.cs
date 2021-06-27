@@ -6,15 +6,15 @@ namespace Hospital
 {
     class Worker
     {
-        private string Name;
+        private string WorkerName;
         private Guid WorkerId;
         private int WorkHours;
         private Job WorkerJobData;
      
 
-        public Worker(string Name, int WorkHours, Job WorkerJobData)
+        public Worker(string WorkerName, int WorkHours, Job WorkerJobData)
         {
-            this.Name = Name;
+            this.WorkerName = WorkerName;
             this.WorkerId = new Guid();
             this.WorkHours = WorkHours;
             this.WorkerJobData = WorkerJobData;
@@ -22,7 +22,7 @@ namespace Hospital
 
         public string GetName
         {
-            get { return this.Name; }
+            get { return this.WorkerName; }
         }
         public Guid GetWorkerid
         {
