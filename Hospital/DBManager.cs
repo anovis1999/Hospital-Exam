@@ -19,6 +19,8 @@ namespace Hospital
             }
             catch (Exception ex)
             {
+                Console.WriteLine("GO DBManager.cs and replace the URI to your local path");
+                Console.WriteLine();
                 Console.WriteLine(ex);
             }
             return sqlite_conn;
