@@ -56,8 +56,14 @@ namespace Hospital
                 return CurrentSalary + (Risk / 100 * CurrentSalary);
             }
             else if (this.MinimumHours!=0) {
-                double CurrentSalary = (this.ExpansionRate / 100 * newsalary + newsalary) * this.FixedHours;
-                return CurrentSalary + (Risk/100 * CurrentSalary);
+                if (hours >= FixedHours)
+                {
+                    double CurrentSalary = (this.ExpansionRate / 100 * newsalary + newsalary) * this.FixedHours;
+                    return CurrentSalary + (Risk / 100 * CurrentSalary);
+                }
+                else
+                    return 0;
+                
             }
             else
             {

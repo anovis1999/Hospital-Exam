@@ -15,52 +15,102 @@ namespace Hospital
                 Console.WriteLine("the following worker salray is: "+WorkerSalary);
                 Console.WriteLine("press 1 to watch more workers salary's");
                 Console.WriteLine("press 2 to add worker");
+                Console.WriteLine("press 3 to set worker hours");
 
                 string UserAction = Console.ReadLine();
-                int userACk = Int32.Parse(UserAction);
-                MenuOptions(userACk); 
+                int userAck = Int32.Parse(UserAction);
+                MenuOptions(userAck); 
+                return true;
+            }
+            if (UserWantedAction == 2)
+            {
+                bool AddedWorker = AddWorker();
+                Console.WriteLine("press 1 to watch more workers salary's");
+                Console.WriteLine("press 2 to add worker");
+                Console.WriteLine("press 3 to set worker hours");
+
+                string UserAction = Console.ReadLine();
+                int userAck = Int32.Parse(UserAction);
+                MenuOptions(userAck);
+                return true;
+            }
+            if (UserWantedAction == 3)
+            {
+                bool WorkerHours = SetWorkerHours();
+                Console.WriteLine("press 1 to watch more workers salary's");
+                Console.WriteLine("press 2 to add worker");
+                Console.WriteLine("press 3 to set worker hours");
+
+                string UserAction = Console.ReadLine();
+                int userAck = Int32.Parse(UserAction);
+                MenuOptions(userAck);
                 return true;
             }
             else
             {
                 Console.WriteLine("press 1 to watch more workers salary's");
                 Console.WriteLine("press 2 to add worker");
+                Console.WriteLine("press 3 to set worker hours");
 
                 string UserAction = Console.ReadLine();
-                int userACk = Int32.Parse(UserAction);
-                MenuOptions(userACk);
+                int userAck = Int32.Parse(UserAction);
+                MenuOptions(userAck);
             }
-
             return false;
-
         }
+
         public static double CalculateSalary()
         {
             SQLiteConnection conn = DBManager.CreateConn();
+
+            int WorkerHours = 0;
+            int WorkerRisk = 0;
+            string WorkerName = "";
+            string WorkerJobName = "";
+            string WorkerJobType = "";
+
 
 
             string SelectWorkers = "SELECT * FROM Workers";
             SQLiteCommand SelectWorkersCursor = new SQLiteCommand(SelectWorkers, conn);
             SQLiteDataReader ReadersWorkers = SelectWorkersCursor.ExecuteReader();
-            Dictionary<int, int> WorkersDict = new Dictionary<int, int>();
+            Dictionary<int, int> WorkersDict2Job = new Dictionary<int, int>();
+            Dictionary<int, int> WorkersDictHours = new Dictionary<int, int>();
+            Dictionary<int, string> WorkersDictName = new Dictionary<int, string>();
+
             while (ReadersWorkers.Read())
             {
-                Console.WriteLine($"{ReadersWorkers.GetInt32(0)} {ReadersWorkers.GetString(1)} {ReadersWorkers.GetInt32(2)} {ReadersWorkers.GetInt32(3)} ");
-                WorkersDict.Add(ReadersWorkers.GetInt32(0), ReadersWorkers.GetInt32(3));
+                Console.WriteLine($"{ReadersWorkers.GetInt32(0)} {ReadersWorkers.GetString(1)} ");
+                WorkersDict2Job.Add(ReadersWorkers.GetInt32(0), ReadersWorkers.GetInt32(3));
+                WorkersDictHours.Add(ReadersWorkers.GetInt32(0), ReadersWorkers.GetInt32(2));
+                WorkersDictName.Add(ReadersWorkers.GetInt32(0), ReadersWorkers.GetString(1));
+
             }
             Console.WriteLine("Enter the worker id to watch his current salary:");
             string WorkerId = Console.ReadLine();
             int WorkerJobId = Int32.Parse(WorkerId);
-            int SelectedWorkerJobId = WorkersDict[WorkerJobId];
+            int SelectedWorkerJobId = WorkersDict2Job[WorkerJobId];
+            WorkerHours = WorkersDictHours[WorkerJobId];
+            WorkerName = WorkersDictName[WorkerJobId];
 
-        
+            string SelectJobs = "SELECT * FROM Jobs";
+            SQLiteCommand SelectJobsCursor = new SQLiteCommand(SelectJobs, conn);
+            SQLiteDataReader JobReader = SelectJobsCursor.ExecuteReader();
+            while (JobReader.Read())
+            {
+                if (JobReader.GetInt32(0) == SelectedWorkerJobId)
+                {
+                    WorkerRisk = JobReader.GetInt32(3);
+                    WorkerJobType = JobReader.GetString(1);
+                }
+            }
+
             string SelectJobRanks = String.Format("SELECT * FROM Job2Rank where jobId={0}", SelectedWorkerJobId);
             SQLiteCommand SelectJobRanksCursor = new SQLiteCommand(SelectJobRanks, conn);
             SQLiteDataReader JobsReader = SelectJobRanksCursor.ExecuteReader();
             List<int> RanksData = new List<int>();
             while (JobsReader.Read())
             {
-                //Console.WriteLine($"{JobsReader.GetInt32(0)} {JobsReader.GetInt32(1)}");
                 RanksData.Add(JobsReader.GetInt32(1));
             }
 
@@ -77,7 +127,6 @@ namespace Hospital
 
                 while (RanksReader.Read())
                 {
-                    //Console.WriteLine($"{RanksReader.GetInt32(0)} {RanksReader.GetString(1)} {RanksReader.GetFloat(2)} {RanksReader.GetInt32(3)} {RanksReader.GetInt32(4)}");
                     TempRanks.Add("rankName", RanksReader.GetString(1));
                     TempRanks.Add("expansionRate", RanksReader.GetFloat(2));
                     TempRanks.Add("minimumHours", RanksReader.GetInt32(3));
@@ -89,30 +138,78 @@ namespace Hospital
                 var expansionRate = Ranks[i]["expansionRate"];
                 var minimumHours = Ranks[i]["minimumHours"];
                 var fixedHours = Ranks[i]["fixedHours"];
-                //Console.WriteLine(Ranks[i]["rankName"]);
                 RanksList.Add(new Ranks(rankName, expansionRate, minimumHours, fixedHours));
             }
 
 
-            Job job = new Job("Cleaner", "Professional", RanksList, 0);
-            Worker worker = new Worker("jhon", 55, job);
+            Job job = new Job(WorkerJobName, WorkerJobType, RanksList, WorkerRisk);
+            Worker worker = new Worker(WorkerName, WorkerHours, job);
             return (worker.GetWorkerJobData.CalculateSalary(worker.GetWorkhours));
         }
-        public static void InsertUser()
+
+
+        public static bool AddWorker()
         {
             SQLiteConnection conn = DBManager.CreateConn();
 
+            Console.WriteLine("Welcome to signup page for new worker");
+            Console.WriteLine("Fill worker name");
+            string WorkerName = Console.ReadLine();
+            Console.WriteLine("Fill worker monthly work hours");
+            string WorkerHours = Console.ReadLine();
+            int WorkerHoursInt = Int32.Parse(WorkerHours);
+
             string SelectJobs = "SELECT * FROM Jobs";
             SQLiteCommand SelectJobsCursor = new SQLiteCommand(SelectJobs, conn);
-            SQLiteDataReader r = SelectJobsCursor.ExecuteReader();
-            while (r.Read())
+            SQLiteDataReader Jobs = SelectJobsCursor.ExecuteReader();
+            while (Jobs.Read())
             {
-                Console.WriteLine($"{r.GetInt32(0)} {r.GetString(1)} {r.GetString(2)} {r.GetInt32(3)} ");
+                Console.WriteLine($"{Jobs.GetInt32(0)} {Jobs.GetString(1)} {Jobs.GetString(2)} {Jobs.GetInt32(3)}");
             }
 
+            Console.WriteLine("Choose worker work type, please select the job ID");
+            string WorkerJobId = Console.ReadLine();
+            int WorkerJobIdInt = Int32.Parse(WorkerJobId);
 
-            //string jobId = Console.ReadLine();
-            //int JobId = Int32.Parse(jobId);
+            string SqlInsertWorker = string.Format("INSERT INTO Workers (workerName, workerHours, jobId) values ('{0}', '{1}', '{2}')", WorkerName, WorkerHours, WorkerJobIdInt);
+            SQLiteCommand command = new SQLiteCommand(SqlInsertWorker, conn);
+            command.ExecuteNonQuery();
+            //var cmd = new SQLiteCommand(conn);
+
+
+            return true;
         }
+
+
+        public static bool SetWorkerHours()
+        {
+            SQLiteConnection conn = DBManager.CreateConn();
+            Console.WriteLine("Welcome to edit page for our worker");
+            string SelectWorkers = "SELECT * FROM Workers";
+            SQLiteCommand SelectWorkersCursor = new SQLiteCommand(SelectWorkers, conn);
+            SQLiteDataReader ReadersWorkers = SelectWorkersCursor.ExecuteReader();
+            Dictionary<int, int> WorkersDict2Hours = new Dictionary<int, int>();
+            
+            while (ReadersWorkers.Read())
+            {
+                Console.WriteLine($"{ReadersWorkers.GetInt32(0)} {ReadersWorkers.GetString(1)} ");
+                WorkersDict2Hours.Add(ReadersWorkers.GetInt32(0), ReadersWorkers.GetInt32(2));
+
+            }
+
+            Console.WriteLine("Choose worker ID");
+            string WorkerId = Console.ReadLine();
+
+            Console.WriteLine("Choose worker new hours");
+            string NewHours = Console.ReadLine();
+
+            string UpdateQuery = string.Format("UPDATE Workers SET workerHours = '{0}' WHERE workerId='{1}' ", NewHours, WorkerId);
+            Console.WriteLine(UpdateQuery);
+            SQLiteCommand command = new SQLiteCommand(UpdateQuery, conn);
+            command.ExecuteNonQuery();
+            return true;
+            
+        }
+
     }
 }
